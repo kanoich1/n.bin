@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NINE - New social Interactions No onE</title>
+    <style>
+        /* 极简主义设计 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', monospace;
+            background-color: #000;
+            color: #0f0;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        #container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        #header {
+            padding: 10px;
+            border-bottom: 1px dashed #0f0;
+        }
+        
+        #main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        #footer {
+            padding: 10px;
+            border-top: 1px dashed #0f0;
+            font-size: 0.8em;
+        }
+        
+        .blink {
+            animation: blink 1s step-end infinite;
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        
+        /* 彩蛋触发区域 */
+        #easter-egg-trigger {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            NINE v11.4.5 | ID: <span id="user-id">guest_</span>
+        </div>
+        
+        <div id="main">
+            <div>
+                <h1>_</h1>
+                <p>System initialized. Zero modules loaded.</p>
+                <p>Type <span class="blink">/</span> to begin</p>
+                
+                <!-- 隐藏的彩蛋触发区域 -->
+                <div id="easter-egg-trigger"></div>
+            </div>
+        </div>
+        
+        <div id="footer">
+            <p>NINE is an open-source platform. Build your own world.</p>
+            <p>彩蛋计数: <span id="egg-counter">0/9</span></p>
+        </div>
+    </div>
+
+    <script>
+        // 基础交互逻辑
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '/') {
+                // 打开插件市场
+                alert('[PLUGIN MARKET]\n\nAvailable plugins: 0\nVisit sky.opensource.com/socialconversation/ to install');
+            }
+        });
+        
+        // 隐藏彩蛋：点击特定区域5次触发
+        let eggCount = 0;
+        document.getElementById('easter-egg-trigger').addEventListener('click', () => {
+            eggCount++;
+            document.getElementById('egg-counter').textContent = `${eggCount}/9`;
+            
+            if (eggCount === 5) {
+                // 触发第一个彩蛋
+                const answer = prompt('《银河系漫游指南》的出版时间?');
+                if (answer === '1979') {
+                    document.body.style.backgroundColor = '#042069';
+                    alert('Correct! Dinosaur keyboard activated!');
+                    // 这里应该加载恐龙语插件
+                }
+            }
+        });
+        
+        // 模拟用户ID生成
+        setTimeout(() => {
+            document.getElementById('user-id').textContent = 
+                'fugu_' + Math.floor(Math.random() * 10000);
+        }, 1000);
+    </script>
+</body>
+  </html>
